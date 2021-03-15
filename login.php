@@ -183,7 +183,7 @@ function test_input($data) {
   <li><a href="#about">All books</a></li>
   <li><a href="#about">New Arrival</a></li>
   <li><a href="/BDBooks/login.php">Sign in</a></li>
-  <li><a href="/BDBooks/user/register.php">Sign up</a></li>
+  <li><a href="/BDBooks/users/register.php">Sign up</a></li>
 </ul>
 <div class="hero-bg">
 	<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
