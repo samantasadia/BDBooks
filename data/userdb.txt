@@ -1,0 +1,10 @@
+samiaanita11111@gmail.com
+123456
+---Basic Information--- 
+First Name: Samia
+Last Name: Anita
+Gender: female
+---User Account Info--- 
+Username: anitabd
+Password: 123456
+Recovery email: samanta@gmail.com

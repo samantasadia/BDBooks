@@ -53,7 +53,7 @@ a:link {
   text-decoration: none;
 }
 .hero-bg {
-    background: #307D99 url('../assets/images/bg.jpg');
+    background: #307D99;
     color: white;
 	background-size: cover;
     text-align: center;
@@ -77,38 +77,43 @@ div.top {
   content: "";
   clear: both;
   display: table;
-  padding-left:15em;
+  padding-top:2em;
+  padding-left:20em;
 }
 div.bottom {
-  padding: 2em 5em 0 15em;
+  padding: 2em 5em 0 20em;
 }
 
 .heading .site-logo {
   margin-left: 20px;
 }
+* {
+  box-sizing: border-box;
+}
 .heading .site-logo .search-container {
   float: right;
 }
 .heading .site-logo .search-container button {
-  float: right;
-  padding: 6px 10px;
-  padding-bottom: .8em;
-  margin-top: .7em;
-  margin-right: 16px;
-  background: #ddd;
+  float: left;
+  width: 20%;
+  padding: 10px;
+  background: #2196F3;
+  color: white;
   font-size: 17px;
-  border: none;
+  border: 1px solid grey;
+  border-left: none;
   cursor: pointer;
 }
 .heading .site-logo .search-container button:hover {
   background: #ccc;
 }
 input[type=text]{
-    border: 1px solid #707070;
-	margin-top: .7em;
-	padding: .5em 0 .5em 3em;
-    box-sizing: border-box;
-	font-size: 17px;
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  background: #f1f1f1;
 
 }
 </style>
@@ -116,17 +121,16 @@ input[type=text]{
 <body>
 <div class="heading">
 	<div class="site-logo">
-		<a target="_blank" href="/BDBooks/dashboard/index.php">
+		<a target="_blank" href="/BDBooks/dashboard/index.html">
 		<img src="/BDBooks/assets/images/bookslogo.PNG" alt="logo" width="300" height="60">
 		</a>
 		<div class="search-container">
-		<form action="/action_page.php">
-		  <input type="text" placeholder="Search book.." name="search">
-		  <button type="submit"><i class="fa fa-search"></i></button>
-		</form>
+			<form action="/action_page.php">
+			  <input type="text" placeholder="Search book.." name="search">
+			  <button type="submit"><i class="fa fa-search"></i></button>
+			</form>
+		</div>
 	</div>
-	</div>
-	
 </div>
 <ul>
   <li><a class="active" href="#home">Home</a></li>
@@ -135,8 +139,8 @@ input[type=text]{
   <li><a href="#about">About</a></li>
   <li><a href="#about">All books</a></li>
   <li><a href="#about">New Arrival</a></li>
-  <li><a href="#about">Sign in</a></li>
-  <li><a href="#about">Sign up</a></li>
+  <li><a href="/BDBooks/login.php">Sign in</a></li>
+  <li><a href="/BDBooks/users/register.php">Sign up</a></li>
 </ul>
 <div class="hero-bg">
    <div class="top">
