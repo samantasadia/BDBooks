@@ -143,10 +143,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if($email != "" && $password!= ""){
 		$vemail = file_get_contents('./data/db.txt', FALSE, NULL, 0, strlen($email));
 		$pass = file_get_contents('./data/db.txt', FALSE, NULL, strlen($email), strlen($password)+1);
-		echo $pass;
-		echo $vemail;
-		//echo $password;
-		//echo $email;
+		$filepath = "data/userdb.txt";
+		$f3 = fopen($filepath, "r");
+		$data = fread($f3, filesize($filepath));
+		//$data_explode_by_newline = explode("\n", $data);
+		$data_decoded = json_decode($data, true);
 		if($email == $vemail && $password== $pass)
 		{
 			$_SESSION["email"] = $email;
@@ -155,7 +156,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			header('Location: http://localhost/BDBooks/admin/home.php');
 			exit();
 		}
-		else{ echo "<center> <span >Invalid Email/Password </span></center>";}
+		elseif($email == $data_decoded["email"] && $password == $data_decoded["password"])
+		{ 
+			$_SESSION["email"] = $data_decoded["email"];
+			$_SESSION["password"] = $data_decoded["password"];
+			
+			header('Location: http://localhost/BDBooks/users/home.php');
+			exit();
+		}
+		//else 
+		//{echo "<center> <span >Invalid Email/Password </span></center>";}
   }
 }
 function test_input($data) {

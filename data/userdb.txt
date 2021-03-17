@@ -1,10 +1,1 @@
-samiaanita11111@gmail.com
-123456
----Basic Information--- 
-First Name: Samia
-Last Name: Anita
-Gender: female
----User Account Info--- 
-Username: anitabd
-Password: 123456
-Recovery email: samanta@gmail.com
+{"firstName":"Samia","lastName":"Anita","email":"samiaanita11111@gmail.com","gender":"female","uname":"anitabd","password":"123456","recoveryEmail":"samanta@gmail.com"}

@@ -155,6 +155,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   } else {
     $remail = test_input($_POST["remail"]);
   }
+  if($fname != "" && $lname != "" && $email != "" && $gender !="" && $uname != "" && $password != "" && $remail != "")
+   {
+		$arr1 = array('firstName' => $fname, 'lastName' => $lname, 'email' => $email,'gender' => $gender, 
+						'uname' => $uname,'password' => $password,'recoveryEmail' => $remail);
+		$f1 = fopen("../data/userdb.txt","a+") ;
+		$arr1_encode = json_encode($arr1);
+		fwrite($f1, $arr1_encode);
+		fclose($f1);
+		header('Location: http://localhost/BDBooks/login.php');
+		exit();
+   }
+
   
 }
 function test_input($data) {
@@ -239,17 +251,6 @@ function test_input($data) {
 </html>
 <?php
 
-$myfile = fopen("../data/userdb.txt","a+") 
-	or die ("Unable to open the file");
-$array = array($fname,$lname,$gender,$email);
-$val = "";
-if(in_array($val,$array)){
-		echo "";
-}
-else{
-	fputs($myfile,$email."\n".$password."\n---Basic Information--- \nFirst Name: ".$fname."\n"."Last Name: ".$lname."\n"."Gender: ".$gender."\n".
-					"---User Account Info--- \nUsername: ".$uname."\n"."Password: ".$password."\n"."Recovery email: ".$remail."\n");
-}
-fclose($myfile);
+
 
 ?>
