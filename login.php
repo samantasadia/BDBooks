@@ -114,6 +114,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$data = fread($f3, filesize($filepath));
 		//$data_explode_by_newline = explode("\n", $data);
 		$data_decoded = json_decode($data, true);
+		//admin login
 		if($email == $vemail && $password== $pass)
 		{
 			$_SESSION["email"] = $email;
@@ -122,6 +123,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			header('Location: http://localhost/BDBooks/admin/home.php');
 			exit();
 		}
+		//user login
 		elseif($email == $data_decoded["email"] && $password == $data_decoded["password"])
 		{ 
 			$_SESSION["email"] = $data_decoded["email"];
@@ -176,8 +178,17 @@ function test_input($data) {
 				<a href ="/BDBooks/user/register.php">Register now!!<a>
 				<span class="error"> <?php echo $U_P_Err;?></span>
       </div>
-</form>
+
+</div>
+<div class="footer">
+  <p>Contact us<br>
+		samantasadia1971@gmail.com<br>
+		Developer: Samanta Sadia<br>
+		<a href="https://github.com/samantasadia">www.github.com</a><br>
+		© Copyright 2021 BDBooks Ltd. - All Rights Reserved
+  </p>
 </div>
 </center>
+</form>
 </body>
 </html>

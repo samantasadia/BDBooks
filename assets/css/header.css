@@ -1,3 +1,7 @@
+*{
+	margin :0px;
+	padding : 0px;
+}
 ul {
   list-style-type: none;
   margin: 0;
@@ -61,4 +65,19 @@ input[type=text]{
     text-align: center;
     padding-bottom: 50em;
 	padding-top: 2em;
+}
+.form-design{
+	position: static;
+
+}
+.footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #515151;
+  color: white;
+}
+.footer a{
+	color: white;
+    text-decoration: none;
+    font-weight: bold;
 }

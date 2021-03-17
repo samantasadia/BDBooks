@@ -102,6 +102,17 @@ span {
 	position: static;
 	
 }
+.footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #515151;
+  color: white;
+}
+.footer a{
+	color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
 
 </style>
 
@@ -246,11 +257,15 @@ function test_input($data) {
       </div>
 </form>
 </div>
+<div class="footer">
+  <p>Contact us<br>
+		samantasadia1971@gmail.com<br>
+		Developer: Samanta Sadia<br>
+		<a href="https://github.com/samantasadia">www.github.com</a><br>
+		© Copyright 2021 BDBooks Ltd. - All Rights Reserved
+  </p>
+</div>
 </center>
 </body>
 </html>
-<?php
 
-
-
-?>
