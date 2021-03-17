@@ -5,43 +5,13 @@ session_start();
 <html>
 <head>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="assets/css/header.css">
 <style>
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #333;
-}
-
-li {
-  float: left;
-  width: 12%;
-}
-
-li a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-li a:hover {
-  background-color: #111;
-}
 
 a:link {
   text-decoration: none;
 }
-.hero-bg {
-    background: #307D99;
-    color: white;
-	background-size: cover;
-    text-align: center;
-    padding-bottom: 50em;
-	padding-top: 10em;
-}
+
  table.center {
           margin-left: auto;
           margin-right: auto;
@@ -115,18 +85,14 @@ a:link {
 	color: #FF0000;
 
 	}
-.form-design{
-	position: static;
-	margin-left: 40em;
-	margin-top: 5em
-}
+
 </style>
 
 <?php
 // define variables and set to empty values
-$passwordErr = $emailErr = "";
+$passwordErr = $emailErr = $U_P_Err = "";
 
-$email = $password = "";
+$email = $password =  "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if (empty($_POST["email"])) {
@@ -164,8 +130,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			header('Location: http://localhost/BDBooks/users/home.php');
 			exit();
 		}
-		//else 
-		//{echo "<center> <span >Invalid Email/Password </span></center>";}
+		else 
+		{
+			$U_P_Err = "Invalid Email/Password!!";
+		}
   }
 }
 function test_input($data) {
@@ -206,6 +174,7 @@ function test_input($data) {
 			   
 				<input type="submit" value="Sign in" name="submit">
 				<a href ="/BDBooks/user/register.php">Register now!!<a>
+				<span class="error"> <?php echo $U_P_Err;?></span>
       </div>
 </form>
 </div>
