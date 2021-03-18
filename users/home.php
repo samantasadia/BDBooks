@@ -38,7 +38,7 @@ th {
 	
 </div>
 <ul>
-  <li><a class="active" href="/BDBooks/index.html">Home</a></li>
+  <li><a class="active" href="/BDBooks/index.php">Home</a></li>
   <li><a href="#news">News</a></li>
   <li><a href="#contact">Contact</a></li>
   <li><a href="#about">About</a></li>
@@ -63,12 +63,7 @@ th {
 	</form>
  </div>
  <div class="footer">
-  <p>Contact us<br>
-		samantasadia1971@gmail.com<br>
-		Developer: Samanta Sadia<br>
-		<a href="https://github.com/samantasadia">www.github.com</a><br>
-		© Copyright 2021 BDBooks Ltd. - All Rights Reserved
-  </p>
+	<?php include '../assets/layout/footer.php' ; ?>	
 </div>
 <center>
 

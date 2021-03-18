@@ -1,0 +1,1 @@
+{"id":"100","bname":"Ghare Baire","author":"Rabindranath Tagore","price":"230","des":"ghaere","pub":"verkrijgbaar bij Rakuten Kobo","path":"..\/assets\/uploads\/ghare-baire.jpg"}

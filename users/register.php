@@ -191,14 +191,13 @@ function test_input($data) {
 <body>
 <div class="heading">
 	<div class="site-logo">
-		<a target="_blank" href="/BDBooks/dashboard/index.html">
+		<a target="_blank" href="/BDBooks/index.php">
 		<img src="/BDBooks/assets/images/bookslogo.PNG" alt="logo" width="300" height="60">
 		</a>
 	</div>
-	
 </div>
 <ul>
-  <li><a class="active" href="/BDBooks/index.html">Home</a></li>
+  <li><a class="active" href="../index.php">Home</a></li>
   <li><a href="#news">News</a></li>
   <li><a href="#contact">Contact</a></li>
   <li><a href="#about">About</a></li>
@@ -258,12 +257,7 @@ function test_input($data) {
 </form>
 </div>
 <div class="footer">
-  <p>Contact us<br>
-		samantasadia1971@gmail.com<br>
-		Developer: Samanta Sadia<br>
-		<a href="https://github.com/samantasadia">www.github.com</a><br>
-		© Copyright 2021 BDBooks Ltd. - All Rights Reserved
-  </p>
+	<?php include '../assets/layout/footer.php' ; ?>
 </div>
 </center>
 </body>
