@@ -11,7 +11,7 @@ session_unset();
 
 // destroy the session
 session_destroy();
-header('Location: http://localhost/BDBooks/index.html');
+header('Location: http://localhost/BDBooks/index.php');
 			exit();
 ?>
 </body>

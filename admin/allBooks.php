@@ -10,6 +10,7 @@ $f3 = fopen($filepath, "r");
 $data = fread($f3, filesize($filepath));
 $data_decoded = json_decode($data, true);
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,13 +27,13 @@ h1 {
 }
 span {color: #FF0000;}
 .image {
-	float :left;
+	float :center;
 	margin-left : 15em;
 	margin-top: 1em;
 }
 .info {
-	float:left;
-	margin: 5em 10em 0 2em;
+	float:right;
+	margin:0 25em 0 2em;
 	font-weight: bold;
 	text-aligh: left;
 	font-size: 20px;
@@ -46,6 +47,30 @@ span {color: #FF0000;}
     padding-bottom: 50em;
 	padding-top: 2em;
 }
+.container .box { 
+                width:650px; 
+                margin:50px; 
+                display:table; 
+            } 
+            .container .box .box-row { 
+                display:table-row; 
+            } 
+            .container .box .box-cell { 
+                display:table-cell; 
+                width:200%; 
+                padding:5px; 
+            } 
+            .container .box .box-cell.box1 { 
+                float :center;
+
+             } 
+            .container .box .box-cell.box2 { 
+				float:right;
+				font-weight: bold;
+				text-aligh: left;
+				font-size: 20px;
+				margin-bottom: 70px;
+            } 
 </head>
 </style>
 <body>
@@ -70,21 +95,30 @@ span {color: #FF0000;}
 </ul>
 <div class="hero">
 	<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
-		<div class="form-design">
-		<h1>Book added successfully</h1><br>
-		<div class="image">
-			<img src="<?=@$data_decoded[1]["path"]?>" width="400" height="400" />
-		</div>
-		<div class="info">
-		<?php 
-			echo "Book name :" . $data_decoded[1]["bname"] ."<br>";
-			echo "Author :" . $data_decoded[1]["author"] . "<br>";
-			echo "Price :" . $data_decoded[1]["price"] . "Tk" . "<br>";
-			echo "Publication :" . $data_decoded[1]["pub"] . "<br>";
-			echo "Description :" . $data_decoded[1]["des"];
-		?>
-		</div>
-		</div>
+	<div class="form-design">
+		<h1>All books list</h1><br>
+		
+					<?php for ($row=0; $row<3; $row++){ ?>
+				<div class="container"> 
+					<div class="box"> 
+						<div class="box-row">
+		
+							<div class="box-cell box1">
+							<img src="<?=@$data_decoded[$row]["path"]?>" width="300" height="350" />
+							</div>
+							<div class="box-cell box2">
+							<?php echo "Book name :" . $data_decoded[$row]["bname"] ."<br>";
+							echo "Author :" . $data_decoded[$row]["author"] . "<br>";
+							echo "Price :" . $data_decoded[$row]["price"] . "Tk" . "<br>";
+							echo "Publication :" . $data_decoded[$row]["pub"] . "<br>";
+							echo "Description :" . $data_decoded[$row]["des"] ."<br>"; ?>
+							</div>
+						</div>
+					</div>
+				</div>
+					<?php } ?>
+				
+	</div>
 </div>
 <div class="footer">
   <?php include '../assets/layout/footer.php' ; ?>

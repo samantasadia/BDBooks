@@ -5,7 +5,7 @@ if(empty($_SESSION))
 	header('Location:http://localhost/BDBooks/login.php');
 	exit();
 }
-$filepath = "../data/userdb.txt";
+$filepath = "../data/bookdb.txt";
 $f3 = fopen($filepath, "r");
 $data = fread($f3, filesize($filepath));
 $data_decoded = json_decode($data, true);

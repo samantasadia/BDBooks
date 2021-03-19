@@ -175,7 +175,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $file_field = $_FILES["file_field"];
   }
   
-    if (empty($_POST["pub"])) {
+  if (empty($_POST["pub"])) {
     $pubErr = "publication is required";
   } else {
     $pub = test_input($_POST["pub"]);
@@ -187,12 +187,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$target_file = $target_dir . basename($_FILES["file_field"]["name"]);
 	   if (move_uploaded_file($_FILES["file_field"]["tmp_name"], $target_file))
 	   {
-			$arr1 = array('id' => $id, 'bname' => $bname, 'author' => $author, 'price' => $price,'des' => $des, 
-							'pub' => $pub,'path' => $target_file );
-			$f1 = fopen("../data/bookdb.txt","a+") ;
-			$arr1_encode = json_encode($arr1);
-			fwrite($f1, $arr1_encode);
-			fclose($f1);
+			$data = array();
+			$json_string = file_get_contents("../data/bookdb.json");
+			$data = json_decode($json_string, true);
+			array_push($data, array('id' => $id, 'bname' => $bname, 'author' => $author, 'price' => $price,'des' => $des, 
+							'pub' => $pub,'path' => $target_file ));
+			$strNew = json_encode($data);
+			file_put_contents("../data/bookdb.json", $strNew);
+
 			header('Location: http://localhost/BDBooks/admin/bDetails.php');
 			exit();
 	   }
