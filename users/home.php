@@ -5,10 +5,18 @@ if(empty($_SESSION))
 	header('Location:http://localhost/BDBooks/login.php');
 	exit();
 }
-$filepath = "../data/bookdb.txt";
-$f3 = fopen($filepath, "r");
-$data = fread($f3, filesize($filepath));
-$data_decoded = json_decode($data, true);
+		
+$host = "localhost";
+		$user = "root";
+		$pass = "";
+		$db = "bookbd";
+		// Create connection
+		$conn = new mysqli($host, $user, $pass, $db);
+		// Check connection
+		if ($conn->connect_error) {
+		  die("Connection failed: " . $conn->connect_error);
+		}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -44,7 +52,7 @@ th {
   <li><a href="#about">About</a></li>
   <li><a href="#about">All books</a></li>
   <li><a href="#about">New Arrival</a></li>
-  <li><a href="/BDBooks/users/home.php"><?php echo $data_decoded["firstName"]; ?></a></li>
+  <li><a href="/BDBooks/users/home.php"><?php echo $_SESSION["email"]; ?></a></li>
   <li><a href="/BDBooks/logout.php">Sign out</a></li>
 </ul>
 <div class="hero-bg">
@@ -54,10 +62,21 @@ th {
 		<h2><?php echo $_SESSION["email"]; ?> </h2>
 		<h3><a href="">Logout<a></h3>
 		<?php 
-			echo "Name :" . $data_decoded["firstName"] ." ". $data_decoded["lastName"] . "<br>";
-			echo "Email :" . $data_decoded["email"] . "<br>";
-			echo "Gender :" . $data_decoded["gender"] . "<br>";
-			echo "Recovery email :" . $data_decoded["recoveryEmail"];
+
+			echo "Connection successful";
+			$email= $_SESSION["email"];
+			$sql = "SELECT * FROM users WHERE email='$email' ";
+			$result = $conn->query($sql);
+
+			if ($result->num_rows > 0) {
+			  // output data of each row
+			  while($row = $result->fetch_assoc()) {
+					echo "Name :" . $row["firstName"] ." ". $row["lastName"] . "<br>";
+					echo "Email :" . $row["email"] . "<br>";
+					echo "Gender :" . $row["gender"] . "<br>";
+					echo "Recovery email :" . $row["recoveryEmail"];
+			  }
+			}
 		?>
 		</div>
 	</form>

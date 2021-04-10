@@ -107,35 +107,47 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = test_input($_POST["password"]);
   }
   if($email != "" && $password!= ""){
-		$vemail = file_get_contents('./data/db.txt', FALSE, NULL, 0, strlen($email));
-		$pass = file_get_contents('./data/db.txt', FALSE, NULL, strlen($email), strlen($password)+1);
-		$filepath = "data/userdb.txt";
-		$f3 = fopen($filepath, "r");
-		$data = fread($f3, filesize($filepath));
-		//$data_explode_by_newline = explode("\n", $data);
-		$data_decoded = json_decode($data, true);
-		//admin login
-		if($email == $vemail && $password== $pass)
-		{
-			$_SESSION["email"] = $email;
-			$_SESSION["password"] = $password;
-			
-			header('Location: http://localhost/BDBooks/admin/home.php');
-			exit();
+	  
+		$host = "localhost";
+		$user = "root";
+		$pass = "";
+		$db = "bookbd";
+		// Create connection
+		$conn = new mysqli($host, $user, $pass, $db);
+		// Check connection
+		if ($conn->connect_error) {
+		  die("Connection failed: " . $conn->connect_error);
 		}
-		//user login
-		elseif($email == $data_decoded["email"] && $password == $data_decoded["password"])
-		{ 
-			$_SESSION["email"] = $data_decoded["email"];
-			$_SESSION["password"] = $data_decoded["password"];
-			
-			header('Location: http://localhost/BDBooks/users/home.php');
-			exit();
+		else{
+			echo "Connection successful";
+			$sql = "SELECT * FROM users WHERE email='$email' AND password='$password' ";
+			$result = $conn->query($sql);
+
+			if ($result->num_rows > 0) {
+			  // output data of each row
+			  while($row = $result->fetch_assoc()) {
+				echo "id: " . $row["id"]. " - Name: " . $row["firstname"]. " " . $row["lastname"]. "<br>";
+				if($row["type"] == "admin")
+				{
+					$_SESSION["email"] = $row["email"];
+					$_SESSION["password"] = $row["password"];
+				
+					header('Location: http://localhost/BDBooks/admin/home.php');
+					exit();
+				}
+				else{
+					$_SESSION["email"] = $row["email"];
+					$_SESSION["password"] = $row["password"];
+					header('Location: http://localhost/BDBooks/users/home.php');
+					exit();
+				}
+			  }
+			} else {
+			  $U_P_Err = "Invalid Email/Password!!";
+			}
+			$conn->close();
 		}
-		else 
-		{
-			$U_P_Err = "Invalid Email/Password!!";
-		}
+	
   }
 }
 function test_input($data) {
