@@ -128,13 +128,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if (empty($_POST["fname"])) {
     $fnameErr = "First name is required";
   } else {
-    $fname = test_input($_POST["fname"]);
+  if (ctype_alpha($_POST["fname"]) === false) {
+           $fnameErr = "Your First name only should be in letters.";
+          }
+		  else{
+		  $fname = test_input($_POST["fname"]);
+		  }
   }
   
   if (empty($_POST["lname"])) {
     $lnameErr = "Last name is required";
   } else {
-    $lname = test_input($_POST["lname"]);
+	  if (ctype_alpha($_POST["lname"]) === false) {
+           $lnameErr = "Your Last name only should be in letters.";
+          }
+		  else{
+		  $lname = test_input($_POST["lname"]);
+		  }
   }
   
   if (empty($_POST["gender"])) {
@@ -188,6 +198,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 				header('Location: http://localhost/BDBooks/login.php');
 				exit();
 			}
+			
 			$conn->close();
 		}
 		
