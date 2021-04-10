@@ -187,7 +187,7 @@ function test_input($data) {
                <input type="password"  placeholder="password"  name="password" >
 			   
 				<input type="submit" value="Sign in" name="submit">
-				<a href ="/BDBooks/user/register.php">Register now!!<a>
+				<a href ="/BDBooks/users/register.php">Register now!!<a>
 				<span class="error"> <?php echo $U_P_Err;?></span>
       </div>
 

@@ -168,14 +168,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
   if($fname != "" && $lname != "" && $email != "" && $gender !="" && $uname != "" && $password != "" && $remail != "")
    {
-		$arr1 = array('firstName' => $fname, 'lastName' => $lname, 'email' => $email,'gender' => $gender, 
-						'uname' => $uname,'password' => $password,'recoveryEmail' => $remail);
-		$f1 = fopen("../data/userdb.txt","a+") ;
-		$arr1_encode = json_encode($arr1);
-		fwrite($f1, $arr1_encode);
-		fclose($f1);
-		header('Location: http://localhost/BDBooks/login.php');
-		exit();
+		$host = "localhost";
+		$user = "root";
+		$pass = "";
+		$db = "bookbd";
+		// Create connection
+		$conn = new mysqli($host, $user, $pass, $db);
+		// Check connection
+		if ($conn->connect_error) {
+		  die("Connection failed: " . $conn->connect_error);
+		}
+		else{
+			echo "Connection successful";
+			$sql = "INSERT INTO users (firstName, lastName, email, gender,uname, password, recoveryEmail, type)
+					VALUES ('$fname', '$lname', '$email' ,'$gender', '$uname', '$password', '$remail', 'user')";
+
+			if ($conn->query($sql) === TRUE) {
+				echo "New record created successfully";
+				header('Location: http://localhost/BDBooks/login.php');
+				exit();
+			}
+			$conn->close();
+		}
+		
    }
 
   
