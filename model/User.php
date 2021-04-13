@@ -25,8 +25,8 @@ class User {
 
         $sql = 'SELECT *
                 FROM users
-                WHERE email = ?
-                LIMIT 1';
+                WHERE email = ? ';
+
 
         $statement = $this->connection->prepare($sql);
         $statement->bind_param('i', $userEmail);

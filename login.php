@@ -84,7 +84,7 @@ a:link {
         	color: white;
         }
 .error {
-	
+
 	color: #FF0000;
 
 	}
@@ -103,20 +103,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   } else {
     $email = test_input($_POST["email"]);
   }
-  
+
   if (empty($_POST["password"])) {
     $passwordErr = "*Password is required";
   } else {
     $password = test_input($_POST["password"]);
   }
   if($email != "" && $password!= ""){
-	  
+
 		        $user = $users->getUserByEmailPass($email, $password);
 				if(!empty($user)){
     				if($user->type == "admin")
     				{
     					$_SESSION["email"] = $user->email;
     					$_SESSION["password"] = $user->password;
+              $_SESSION["type"]= 'admin';
 
     					header('Location: http://localhost/BDBooks/admin/home.php');
     					exit();
@@ -124,6 +125,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     				else{
     					$_SESSION["email"] = $user->email;
     					$_SESSION["password"] = $user->password;
+              $_SESSION["type"]= 'user';
     					header('Location: http://localhost/BDBooks/users/home.php');
     					exit();
     				}
@@ -148,7 +150,7 @@ function test_input($data) {
 		<img src="/BDBooks/assets/images/bookslogo.PNG" alt="logo" width="300" height="60">
 		</a>
 	</div>
-	
+
 </div>
 <ul>
   <li><a class="active" href="/BDBooks/index.php">Home</a></li>
@@ -168,7 +170,7 @@ function test_input($data) {
               <input type="email" placeholder="email"  name="email" >
 			  <span class="error"> <?php echo $passwordErr;?></span>
                <input type="password"  placeholder="password"  name="password" >
-			   
+
 				<input type="submit" value="Sign in" name="submit">
 				<a href ="/BDBooks/users/register.php">Register now!!<a>
 				<span class="error"> <?php echo $U_P_Err;?></span>
