@@ -1,5 +1,8 @@
 <?php
 session_start();
+require 'model/dataaccess.php';
+require_once 'model/User.php';
+$users = new User($connection);
 ?>
 <!DOCTYPE html>
 <html>
@@ -108,47 +111,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
   if($email != "" && $password!= ""){
 	  
-		$host = "localhost";
-		$user = "root";
-		$pass = "";
-		$db = "bookbd";
-		// Create connection
-		$conn = new mysqli($host, $user, $pass, $db);
-		// Check connection
-		if ($conn->connect_error) {
-		  die("Connection failed: " . $conn->connect_error);
-		}
-		else{
-			echo "Connection successful";
-			$sql = "SELECT * FROM users WHERE email='$email' AND password='$password' ";
-			$result = $conn->query($sql);
+		        $user = $users->getUserByEmailPass($email, $password);
+				if(!empty($user)){
+    				if($user->type == "admin")
+    				{
+    					$_SESSION["email"] = $user->email;
+    					$_SESSION["password"] = $user->password;
 
-			if ($result->num_rows > 0) {
-			  // output data of each row
-			  while($row = $result->fetch_assoc()) {
-				echo "id: " . $row["id"]. " - Name: " . $row["firstname"]. " " . $row["lastname"]. "<br>";
-				if($row["type"] == "admin")
-				{
-					$_SESSION["email"] = $row["email"];
-					$_SESSION["password"] = $row["password"];
-				
-					header('Location: http://localhost/BDBooks/admin/home.php');
-					exit();
+    					header('Location: http://localhost/BDBooks/admin/home.php');
+    					exit();
+    				}
+    				else{
+    					$_SESSION["email"] = $user->email;
+    					$_SESSION["password"] = $user->password;
+    					header('Location: http://localhost/BDBooks/users/home.php');
+    					exit();
+    				}
 				}
 				else{
-					$_SESSION["email"] = $row["email"];
-					$_SESSION["password"] = $row["password"];
-					header('Location: http://localhost/BDBooks/users/home.php');
-					exit();
+					$U_P_Err = "Invalid Email/Password!!";
 				}
-			  }
-			} else {
-			  $U_P_Err = "Invalid Email/Password!!";
-			}
-			$conn->close();
-		}
-	
-  }
+	}
 }
 function test_input($data) {
   $data = trim($data);
