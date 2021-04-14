@@ -47,7 +47,7 @@ h1 {
     font-weight: bold;
     font-size: 1.2rem;
 	margin-left:12em;
-	
+
 }
 form {
     margin: 6px auto;
@@ -92,15 +92,15 @@ span {
     color: red;
 	margin-left:8em;
 	font-size: 20px;
-}		
+}
 .error {
-	
+
 	color: #FF0000;
 
 	}
 .form-design{
 	position: static;
-	
+
 }
 .footer {
   text-align: center;
@@ -135,7 +135,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		  $fname = test_input($_POST["fname"]);
 		  }
   }
-  
+
   if (empty($_POST["lname"])) {
     $lnameErr = "Last name is required";
   } else {
@@ -146,31 +146,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		  $lname = test_input($_POST["lname"]);
 		  }
   }
-  
+
   if (empty($_POST["gender"])) {
     $genderErr = "Gender is required";
   } else {
     $gender = test_input($_POST["gender"]);
   }
-  
+
   if (empty($_POST["email"])) {
     $emailErr = "Email is required";
   } else {
     $email = test_input($_POST["email"]);
   }
-  
+
   if (empty($_POST["uname"])) {
     $unameErr = "Username is required";
   } else {
     $uname = test_input($_POST["uname"]);
   }
-  
+
   if (empty($_POST["password"])) {
     $passwordErr = "Password is required";
   } else {
     $password = test_input($_POST["password"]);
   }
-  
+
   if (empty($_POST["remail"])) {
     $remailErr = "Recovery email is required";
   } else {
@@ -178,33 +178,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
   if($fname != "" && $lname != "" && $email != "" && $gender !="" && $uname != "" && $password != "" && $remail != "")
    {
-		$host = "localhost";
-		$user = "root";
-		$pass = "";
-		$db = "bookbd";
-		// Create connection
-		$conn = new mysqli($host, $user, $pass, $db);
-		// Check connection
-		if ($conn->connect_error) {
-		  die("Connection failed: " . $conn->connect_error);
-		}
-		else{
-			echo "Connection successful";
-			$sql = "INSERT INTO users (firstName, lastName, email, gender,uname, password, recoveryEmail, type)
-					VALUES ('$fname', '$lname', '$email' ,'$gender', '$uname', '$password', '$remail', 'user')";
+    		$host = "localhost";
+    		$user = "root";
+    		$pass = "";
+    		$db = "bookbd";
+    		// Create connection
+    		$conn = new mysqli($host, $user, $pass, $db);
+    		// Check connection
+    		if ($conn->connect_error) {
+    		    die("Connection failed: " . $conn->connect_error);
+    		}
+    		else{
+      			echo "Connection successful";
+      			$sql = "INSERT INTO users (firstName, lastName, email, gender,uname, password, recoveryEmail, type)
+      					VALUES ('$fname', '$lname', '$email' ,'$gender', '$uname', '$password', '$remail', 'user')";
 
-			if ($conn->query($sql) === TRUE) {
-				echo "New record created successfully";
-				header('Location: http://localhost/BDBooks/login.php');
-				exit();
-			}
-			
-			$conn->close(); 
-		}
-		
+      			if ($conn->query($sql) === TRUE) {
+        				echo "New record created successfully";
+        				header('Location: http://localhost/BDBooks/login.php');
+        				exit();
+      			}
+
+      			   $conn->close();
+    		}
+
    }
 
-  
+
 }
 function test_input($data) {
   $data = trim($data);
@@ -246,8 +246,8 @@ function test_input($data) {
 		<span class="error"> <?php echo $lnameErr;?></span>
 		<label for="lname">Last Name:</label>
 		<input type="text" id="lname" name="lname">
-		
-		
+
+
 		<span class="error"> <?php echo $genderErr;?></span>
 		<label for="gender">Gender:</label>
 		<label for="male">Male</label>
@@ -255,7 +255,7 @@ function test_input($data) {
 		<label for="female">Female</label>
 		<input type="radio" id="female" name="gender" value="female">
 
-		
+
 
 		<span class="error"> <?php echo $emailErr;?></span>
 		<label for="email">Email:</label>
@@ -269,13 +269,13 @@ function test_input($data) {
 		<label for="password">Password:</label>
 		<input type="password" id="password" name="password">
 
-		
+
 
 				<span class="error"> <?php echo $remailErr;?></span>
 		<label for="remail">Recovery Email:</label>
 		<input type="remail" id="remail" name="remail">
 
-		
+
 		<input type="submit" name="submit" value="Create Account">
 		<a href ="/BDBooks/login.php">Sign in now!<a>
 
@@ -288,4 +288,3 @@ function test_input($data) {
 </center>
 </body>
 </html>
-

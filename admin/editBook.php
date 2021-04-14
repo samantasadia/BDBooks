@@ -1,6 +1,8 @@
 <?php
-require '../model/dataaccess.php';
 session_start();
+require '../model/dataaccess.php';
+require '../model/Book.php';
+$books = new Book($connection);
 if(empty($_SESSION))
 {
 	header('Location:http://localhost/BDBooks/login.php');
@@ -137,15 +139,12 @@ th {
 }
 </style>
 <?php
-//margin-left: 40em;
-	//margin-top: 5em;
-// define variables and set to empty values
-$idErr = $bnameErr = $authorErr = $priceErr = $pubErr = $desErr = $fileErr = "";
 
-$id = $bname = $author= $price = $pub = $des = $file_field = "";
+$bnameErr = $authorErr = $priceErr = $pubErr = $desErr = $fileErr = "";
+$bname = $author= $price = $pub = $des = $file_field = "";
+$book = $books->getBookById($_GET["id"]);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
   if (empty($_POST["bname"])) {
     $bnameErr = "Book name is required";
   } else {
@@ -184,33 +183,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   if($bname != "" && $author != "" && $price != "" && $des !="" && $pub != "" && $file_field != "")
    {
+		$oldfile = $_POST["old"];
+    if($file_field == "") {
+      $file_field = $oldfile;
+    }
 		$target_dir = "../assets/uploads/";
 		$target_file = $target_dir . basename($_FILES["file_field"]["name"]);
 	   if (move_uploaded_file($_FILES["file_field"]["tmp_name"], $target_file))
 	   {
-
-			 if ($connection->connect_error) {
-					 die("Connection failed: " . $connection->connect_error);
-			 }
-			 else{
-					 echo "Connection successful";
-					 $sql = "INSERT INTO book (bname, author, price, des, pub, image)
-							 VALUES ($bname', '$author', '$price' ,'$des', '$pub', '$target_file')";
-
-					 if ($connection->query($sql) === TRUE) {
-							 echo "New record created successfully";
-							 header('Location: http://localhost/BDBooks/login.php');
-							 exit();
-					 }
-
-							$conn->close();
-			 }
-	   }
-   }
-   else
-   {
-	   echo 'upload error!!';
-   }
+					if ($connection->connect_error) {
+			 		  	die("Connection failed: " . $connection->connect_error);
+			 		}
+			 		else{
+				 			echo "Connection successful";
+              $sql = "UPDATE book SET bname='$bname', author='$author', price='$price',
+                      des='$des', pub='$pub', image='$target_file' WHERE id='$book->id' ";
+			 					if ($connection->query($sql) === TRUE) {
+			 						echo "Updated successfully";
+									header('Location:http://localhost/BDBooks/admin/home.php');
+									exit();
+								}
+	   			}
+   	}
+ 	}
+  else
+  {
+		echo 'upload error!!';
+  }
 }
 function test_input($data) {
   $data = trim($data);
@@ -240,40 +239,41 @@ function test_input($data) {
   <li><a href="/BDBooks/logout.php">Sign out</a></li>
 </ul>
 <div class="hero-bg">
-	<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" enctype="multipart/form-data">
+	<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])."?id=".$book->id;?>" method="post" enctype="multipart/form-data">
 		<div class="form-design">
-		<h1>Add new Book</h1>
-
-		<span class="error"> <?php echo $idErr;?></span>
-
+		<h1>Edit book</h1>
+    <?php
+      if(!empty($book)){ ?>
 		<span class="error"> <?php echo $bnameErr;?></span>
 		<div class="lb">
 			<label for="bname">Book Name:</label>
 			<div>
-				<input type="text" id="bname" name="bname">
+				<input type="text" id="bname" name="bname" value="<?php echo $book->bname ?>">
 			</div>
 		</div>
 		<span class="error"> <?php echo $authorErr;?></span>
 		<label for="author">Author:</label>
-		<input type="text" id="author" name="author">
+		<input type="text" id="author" name="author" value="<?php echo $book->author ?>">
 
 		<span class="error"> <?php echo $priceErr;?></span>
 		<label for="price">Price:</label>
-		<input type="number" id="price" name="price">
+		<input type="number" id="price" name="price" value="<?php echo $book->price ?>">
 
 		<span class="error"> <?php echo $pubErr;?></span>
 		<label for="pub">Publication:</label>
-		<input type="text" id="pub" name="pub">
+		<input type="text" id="pub" name="pub" value="<?php echo $book->pub ?>">
 
 		<span class="error"> <?php echo $desErr;?></span>
 		<label for="des">Description:</label>
-		<textarea name="des" rows="4" cols="22"></textarea>
+		<textarea name="des" rows="6" cols="22"><?php echo $book->des ?></textarea>
 
 		<span class="error"> <?php echo $fileErr;?></span>
 		<label for="file_field">Upload Book image:</label>
-		<input type="file" id="file_field" name="file_field">
+    <?php $path_parts = pathinfo($book->image); ?>
+		<input type="file" id="file_field" name="file_field" value="<?=$path_parts['basename']?>" accept="image/*" /><span color="white" name="old" id="old"     ><?php echo $path_parts['basename'];?></span>
 
-		<input type="submit" name="submit" value="ADD">
+		<input type="submit" name="submit" value="Update">
+  <?php } ?>
       </div>
 </form>
 </div>
