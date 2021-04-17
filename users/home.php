@@ -5,7 +5,11 @@ if(empty($_SESSION))
 	header('Location:http://localhost/BDBooks/login.php');
 	exit();
 }
-		
+if($_SESSION["type"] != "user")
+{
+	header('Location:http://localhost/BDBooks/login.php');
+	exit();
+}
 $host = "localhost";
 		$user = "root";
 		$pass = "";
@@ -43,7 +47,7 @@ th {
 		<img src="/BDBooks/assets/images/bookslogo.PNG" alt="logo" width="300" height="60">
 		</a>
 	</div>
-	
+
 </div>
 <ul>
   <li><a class="active" href="/BDBooks/index.php">Home</a></li>
@@ -61,7 +65,7 @@ th {
 		<h1>Welcome to home page!!</h1><br>
 		<h2><?php echo $_SESSION["email"]; ?> </h2>
 		<h3><a href="">Logout<a></h3>
-		<?php 
+		<?php
 
 			echo "Connection successful";
 			$email= $_SESSION["email"];
@@ -82,7 +86,7 @@ th {
 	</form>
  </div>
  <div class="footer">
-	<?php include '../assets/layout/footer.php' ; ?>	
+	<?php include '../assets/layout/footer.php' ; ?>
 </div>
 <center>
 

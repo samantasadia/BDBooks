@@ -1,5 +1,7 @@
 <?php
+
 session_start();
+echo $_SESSION["type"];
 require 'model/dataaccess.php';
 require_once 'model/User.php';
 $users = new User($connection);

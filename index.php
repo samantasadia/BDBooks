@@ -1,3 +1,8 @@
+<?php
+require 'model/dataaccess.php';
+require_once 'model/Book.php';
+$books = new Book($connection);
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -84,40 +89,24 @@ div.bottom {
   <li><a href="/BDBooks/login.php">Sign in</a></li>
   <li><a href="/BDBooks/users/register.php">Sign up</a></li>
 </ul>
-
+<?php $allbook=$books->getAllBooks();
+ ?>
 <div class="hero-bg">
    <div class="top">
+     <?php for($i=0; $i<3; $i++){
+       $path_parts = pathinfo($allbook[$i]->image);
+       $image="assets/uploads/".$path_parts['basename'];?>
 		<div class="gallery">
-		  <a target="_blank" href="img_5terre.jpg">
-			<img src="/BDBooks/assets/images/python.jpg" alt="Cinque Terre" width="600" height="400">
-		  <div class="desc">Add a description of the image here</div>
+		  <a target="_blank" href="/BDBooks/users/buyBook.php?id=<?php echo $allbook[$i]->id; ?>">
+			<img src="assets/uploads/<?php echo $path_parts['basename']; ?>" alt="" width="600" height="400">
+		  <div class="desc"><?php echo "Price".$allbook[$i]->price." Tk"; ?></div>
 		  </a>
 		  <input type="button" value="Buy now">
 		</div>
+  <?php } ?>
 
-		<div class="gallery">
-		  <a target="_blank" href="img_forest.jpg">
-			<img src="/BDBooks/assets/images/Deyal.jpeg" alt="Forest" width="600" height="400">
-		  </a>
-		  <div class="desc">Add a description of the image here</div>
-		  <input type="button" value="Buy now">
-		</div>
 
-		<div class="gallery">
-		  <a target="_blank" href="img_lights.jpg">
-			<img src="/BDBooks/assets/images/brishtibilash.jpg" alt="Northern Lights" width="600" height="400">
-		  </a>
-		  <div class="desc">Add a description of the image here</div>
-		  <input type="button" value="Buy now">
-		</div>
 
-		<div class="gallery">
-		  <a target="_blank" href="img_mountains.jpg">
-			<img src="/BDBooks/assets/images/AajHimurBiye.jpg" alt="Mountains" width="600" height="400">
-		  </a>
-		  <div class="desc">Add a description of the image here</div>
-		  <input type="button" value="Buy now">
-		</div>
 	</div>
 	<div class="bottom">
 	<div class="gallery">
@@ -156,4 +145,3 @@ div.bottom {
 </center>
 </body>
 </html>
-
