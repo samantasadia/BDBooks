@@ -58,30 +58,35 @@ if($_SESSION["type"] != "user")
           <?php
           if(!empty($_SESSION["book_cart"]))
           {
+                $shipping_cost=50.00;
                $total = 0;
                foreach($_SESSION["book_cart"] as $keys => $values)
                {
+                 $bk = $books->getBookById($values["id"]);
                  ?>
                   <tr class="productitm">
-                    <td><img src="https://i.imgur.com/8goC6r6.png" class="thumb"></td>
-                    <td><input type="number" value="1" min="0" max="99" class="qtyinput"></td>
-                    <td><?php echo $values["item_name"]; ?></td>
-                    <td>$79.00</td>
+                    <td><img src="<?=@$bk->image ?>" class="thumb" style="width:6em; height:7em;"></td>
+                    <td><?php echo $values["quantity"]; ?></td>
+                    <td><?php echo $values["bname"]; ?></td>
+                    <td><?php echo $values["price"].".00 Tk"; ?></td>
                     <td><span class="remove"><img src="https://i.imgur.com/h1ldGRr.png" alt="X"></span></td>
                   </tr>
-                <?php } ?>
+                  <?php
+                      $total = $total + ($values["quantity"] * $values["price"]);
+                 } ?>
           <!-- tax + subtotal -->
           <tr class="extracosts">
             <td class="light">Shipping &amp; Tax</td>
             <td colspan="2" class="light"></td>
-            <td>$35.00</td>
+            <td>50.00 Tk</td>
             <td>&nbsp;</td>
           </tr>
           <tr class="totalprice">
             <td class="light">Total:</td>
             <td colspan="2">&nbsp;</td>
-            <td colspan="2"><span class="thick">$225.45</span></td>
+            <td colspan="2"><span class="thick"><?php echo $total + $shipping_cost.".00 Tk"; ?></span></td>
           </tr>
+        <?php } ?>
 
           <!-- checkout btn -->
           <tr class="checkoutrow">
