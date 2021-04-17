@@ -140,9 +140,10 @@ th {
 </style>
 <?php
 
-$bnameErr = $authorErr = $priceErr = $pubErr = $desErr = $fileErr = "";
+$bnameErr = $authorErr = $priceErr = $pubErr = $desErr ="";
 $bname = $author= $price = $pub = $des = $file_field = "";
 $book = $books->getBookById($_GET["id"]);
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if (empty($_POST["bname"])) {
@@ -169,11 +170,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $des = test_input($_POST["des"]);
   }
 
-  if (empty($_FILES["file_field"])) {
-    $fileErr = "Image is required";
-  } else {
-    $file_field = $_FILES["file_field"];
-  }
 
   if (empty($_POST["pub"])) {
     $pubErr = "publication is required";
@@ -181,17 +177,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $pub = test_input($_POST["pub"]);
   }
 
+  if (empty($_FILES["file_field"])) {
+    $oldfile = $_GET["pt"];
+    $file_field = $oldfile;
+    $target_dir = "../assets/uploads/";
+		$target_file = $target_dir . $file_field;
+  } else {
+    $file_field = $_FILES["file_field"];
+    $target_dir = "../assets/uploads/";
+		$target_file = $target_dir . basename($_FILES["file_field"]["name"]);
+  }
+
   if($bname != "" && $author != "" && $price != "" && $des !="" && $pub != "" && $file_field != "")
    {
-		$oldfile = $_POST["old"];
-    if($file_field == "") {
-      $file_field = $oldfile;
-    }
-		$target_dir = "../assets/uploads/";
-		$target_file = $target_dir . basename($_FILES["file_field"]["name"]);
+
+     echo $oldfile;
+    echo $target_file;
 	   if (move_uploaded_file($_FILES["file_field"]["tmp_name"], $target_file))
 	   {
 					if ($connection->connect_error) {
+            echo "Connection failed";
 			 		  	die("Connection failed: " . $connection->connect_error);
 			 		}
 			 		else{
@@ -205,6 +210,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 								}
 	   			}
    	}
+    else
+    {
+      echo 'Image upload error !!';
+    }
  	}
   else
   {
@@ -238,8 +247,9 @@ function test_input($data) {
   <li><a href="/BDBooks/admin/home.php">Samanta</a></li>
   <li><a href="/BDBooks/logout.php">Sign out</a></li>
 </ul>
+<?php $path_parts = pathinfo($book->image);?>
 <div class="hero-bg">
-	<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])."?id=".$book->id;?>" method="post" enctype="multipart/form-data">
+	<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])."?id=".$book->id."&pt=".$path_parts['basename'];?>" method="post" enctype="multipart/form-data">
 		<div class="form-design">
 		<h1>Edit book</h1>
     <?php
@@ -267,10 +277,8 @@ function test_input($data) {
 		<label for="des">Description:</label>
 		<textarea name="des" rows="6" cols="22"><?php echo $book->des ?></textarea>
 
-		<span class="error"> <?php echo $fileErr;?></span>
 		<label for="file_field">Upload Book image:</label>
-    <?php $path_parts = pathinfo($book->image); ?>
-		<input type="file" id="file_field" name="file_field" value="<?=$path_parts['basename']?>" accept="image/*" /><span color="white" name="old" id="old"     ><?php echo $path_parts['basename'];?></span>
+		<input type="file" id="file_field" name="file_field" >
 
 		<input type="submit" name="submit" value="Update">
   <?php } ?>

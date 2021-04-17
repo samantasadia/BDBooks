@@ -77,9 +77,12 @@ span {color: #FF0000;}
 		}?>
 
 		<div class="btn-group">
-			<a href ="/BDBooks/admin/update.php">Update Profile</a>
+			<a href ="/BDBooks/admin/editProfile.php">Update Profile</a>
 			<a href ="/BDBooks/admin/addBooks.php">Add New Book</a>
 			<a href ="/BDBooks/admin/allBooks.php">View All Books</a>
+			<a href ="/BDBooks/admin/allUsers.php">View All Users</a>
+			<a href ="/BDBooks/admin/allBooks.php">Update Book</a>
+			<a href ="/BDBooks/admin/allBooks.php">Delete Book</a>
 		</div>
 
 	</div>
