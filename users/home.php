@@ -50,12 +50,12 @@ th {
 
 </div>
 <ul>
-  <li><a class="active" href="/BDBooks/index.php">Home</a></li>
-  <li><a href="#news">News</a></li>
-  <li><a href="#contact">Contact</a></li>
-  <li><a href="#about">About</a></li>
-  <li><a href="#about">All books</a></li>
-  <li><a href="#about">New Arrival</a></li>
+<li><a class="active" href="/BDBooks/index.php">Home</a></li>
+<li><a href="/BDBooks/users/news.php">News</a></li>
+<li><a href="/BDBooks/users/contact.php">Contact</a></li>
+<li><a href="/BDBooks/users/about.php">About</a></li>
+<li><a href="/BDBooks/users/allBooks">All books</a></li>
+<li><a href="/BDBooks/users/newArrival">New Arrival</a></li>
   <li><a href="/BDBooks/users/home.php"><?php echo $_SESSION["email"]; ?></a></li>
   <li><a href="/BDBooks/logout.php">Sign out</a></li>
 </ul>

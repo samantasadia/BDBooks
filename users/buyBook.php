@@ -63,24 +63,25 @@ if(isset($_POST["add_to_cart"]))
   <link rel="stylesheet" href="../assets/css/buy.css">
 </head>
 <body>
-<div class="container">
-  <div class="navbar">
-    <div class="logo">
-      <a href="/BDBooks/index.php"><img src="/BDBooks/assets/images/bookslogo.PNG" alt="BDBooks" width="145px" height="32px" style="border: 2px solid #555"/></a>
-    </div>
-    <nav>
-      <ul id="MenuItems">
-        <li><a href="/BDBooks/index.php">Home</a></li>
-        <li><a href="/BDBooks/index.php">Products</a></li>
-        <li><a href="/BDBooks/common/about.php">About</a></li>
-        <li><a href="/BDBooks/common/contact.php">Contact</a></li>
-        <li><a href="/BDBooks/users/home.php">Account</a></li>
-      </ul>
-    </nav>
-    <a href="/BDBooks/users/cart.php"><img src="https://i.ibb.co/PNjjx3y/cart.png" alt="" width="30px" height="30px"  /></a>
-    <img src="https://i.ibb.co/6XbqwjD/menu.png" alt="" class="menu-icon" onclick="menutoggle()" />
+  <div class="heading">
+  	<div class="site-logo">
+  		<a target="_blank" href="/BDBooks/dashboard/index.html">
+  		<img src="/BDBooks/assets/images/bookslogo.PNG" alt="logo" width="300" height="60">
+  		</a>
+  	</div>
+
   </div>
-</div>
+  <ul>
+    <li><a class="active" href="/BDBooks/index.php">Home</a></li>
+  	<li><a href="/BDBooks/users/news.php">News</a></li>
+  	<li><a href="/BDBooks/users/contact.php">Contact</a></li>
+  	<li><a href="/BDBooks/users/about.php">About</a></li>
+  	<li><a href="/BDBooks/users/allBooks">All books</a></li>
+  	<li><a href="/BDBooks/users/newArrival">New Arrival</a></li>
+    <li><a href="/BDBooks/users/home.php"><?php echo $_SESSION["email"]; ?></a></li>
+    <li><a href="/BDBooks/logout.php">Sign out</a></li>
+  </ul>
+
 <?php $bk = $books->getBookById($_GET["id"]); ?>
 <!-- single product details -->
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])."?id=".$bk->id."&bn=".$bk->bname."&pr=".$bk->price;?>" method="post">

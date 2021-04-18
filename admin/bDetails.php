@@ -56,15 +56,15 @@ span {color: #FF0000;}
 		<img src="/BDBooks/assets/images/bookslogo.PNG" alt="logo" width="300" height="60">
 		</a>
 	</div>
-	
+
 </div>
 <ul>
-  <li><a class="active" href="/BDBooks/index.php">Home</a></li>
-  <li><a href="#news">News</a></li>
-  <li><a href="#contact">Contact</a></li>
-  <li><a href="#about">About</a></li>
-  <li><a href="/BDBooks/admin/allBooks.php">All books</a></li>
-  <li><a href="/BDBooks/admin/addBooks.php">Add books</a></li>
+<li><a class="active" href="/BDBooks/index.php">Home</a></li>
+<li><a href="/BDBooks/users/news.php">News</a></li>
+<li><a href="/BDBooks/users/contact.php">Contact</a></li>
+<li><a href="/BDBooks/users/about.php">About</a></li>
+<li><a href="/BDBooks/users/allBooks">All books</a></li>
+<li><a href="/BDBooks/users/newArrival">New Arrival</a></li>
   <li><a href="/BDBooks/admin/home.php">Samanta</a></li>
   <li><a href="/BDBooks/logout.php">Sign out</a></li>
 </ul>
@@ -76,7 +76,7 @@ span {color: #FF0000;}
 			<img src="<?=@$data_decoded[1]["path"]?>" width="400" height="400" />
 		</div>
 		<div class="info">
-		<?php 
+		<?php
 			echo "Book name :" . $data_decoded[1]["bname"] ."<br>";
 			echo "Author :" . $data_decoded[1]["author"] . "<br>";
 			echo "Price :" . $data_decoded[1]["price"] . "Tk" . "<br>";

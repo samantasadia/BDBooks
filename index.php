@@ -83,8 +83,8 @@ div.bottom {
 <ul>
   <li><a class="active" href="/BDBooks/index.php">Home</a></li>
   <li><a href="#news">News</a></li>
-  <li><a href="#contact">Contact</a></li>
-  <li><a href="#about">About</a></li>
+  <li><a href="/BDBooks/users/contact.php">Contact</a></li>
+  <li><a href="/BDBooks/users/about.php">About</a></li>
   <li><a href="/BDBooks/index.php">New Arrival</a></li>
   <li><a href="/BDBooks/index.php">All Books</a></li>
   <?php if(isset($_SESSION["email"])){?>
