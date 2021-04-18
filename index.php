@@ -72,9 +72,9 @@ div.bottom {
 		<img src="/BDBooks/assets/images/bookslogo.PNG" alt="logo" width="300" height="60">
 		</a>
 		<div class="search-container">
-			<form action="/action_page.php">
+			<form action="/BDBooks/users/search.php" method="get">
 			  <input type="text" placeholder="Search book.." name="search">
-			  <button type="submit"><i class="fa fa-search"></i></button>
+			  <button type="submit" ><i class="fa fa-search"></i></button>
 			</form>
 		</div>
 	</div>
@@ -106,7 +106,8 @@ else{?>
 		<div class="gallery">
 		  <a target="_blank" href="/BDBooks/users/buyBook.php?id=<?php echo $allbook[$i]->id; ?>">
 			<img src="assets/uploads/<?php echo $path_parts['basename']; ?>" alt="" width="600" height="400">
-		  <div class="desc"><?php echo "Price".$allbook[$i]->price." Tk"; ?></div>
+		  <div class="desc"><?php echo $allbook[$i]->author;?><br>
+                      <?php echo "Price :".$allbook[$i]->price." Tk"; ?> </div>
 		  </a>
 		  <input type="button" value="Buy now">
 		</div>

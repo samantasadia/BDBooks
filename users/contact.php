@@ -108,11 +108,11 @@ input[type=submit]:hover {
 </div>
 <ul>
   <li><a class="active" href="/BDBooks/index.php">Home</a></li>
-  <li><a href="#news">News</a></li>
-  <li><a href="/BDBooks/common/contact.php">Contact</a></li>
-  <li><a href="/BDBooks/common/about.php">About</a></li>
-  <li><a href="/BDBooks/common/allBooks.php">All books</a></li>
-  <li><a href="/BDBooks/common/New Arrival.php">Add books</a></li>
+	<li><a href="/BDBooks/users/news.php">News</a></li>
+	<li><a href="/BDBooks/users/contact.php">Contact</a></li>
+	<li><a href="/BDBooks/users/about.php">About</a></li>
+	<li><a href="/BDBooks/users/allBooks">All books</a></li>
+	<li><a href="/BDBooks/users/newArrival">New Arrival</a></li>
   <li><a href="/BDBooks/login.php">Sign in</a></li>
   <li><a href="/BDBooks/user/register.php">Sign up</a></li>
 </ul>

@@ -36,6 +36,21 @@ class Book {
         $row = $result->fetch_object();
         return $row;
     }
+
+    public function getBookByName(string $name) {
+
+        $sql = 'SELECT *
+                FROM book
+                WHERE bname = ? ';
+
+        $statement = $this->connection->prepare($sql);
+        $statement->bind_param('i', $name);
+        $statement->execute();
+        $result = $statement->get_result();
+        // Fetch the data into a stdClass object.
+        $row = $result->fetch_object();
+        return $row;
+    }
     //get user by email and PASSWORD
     public function editBook(int $id) {
 

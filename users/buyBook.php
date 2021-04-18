@@ -61,6 +61,7 @@ if(isset($_POST["add_to_cart"]))
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
   <link rel="stylesheet" href="../assets/css/buy.css">
+  <link rel="stylesheet" href="../assets/css/header.css">
 </head>
 <body>
   <div class="heading">
