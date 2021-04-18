@@ -100,7 +100,7 @@ else{?>
  ?>
 <div class="hero-bg">
    <div class="top">
-     <?php for($i=0; $i<3; $i++){
+     <?php for($i=0; $i<count($allbook); $i++){
        $path_parts = pathinfo($allbook[$i]->image);
        $image="assets/uploads/".$path_parts['basename'];?>
 		<div class="gallery">
@@ -108,8 +108,8 @@ else{?>
 			<img src="assets/uploads/<?php echo $path_parts['basename']; ?>" alt="" width="600" height="400">
 		  <div class="desc"><?php echo $allbook[$i]->author;?><br>
                       <?php echo "Price :".$allbook[$i]->price." Tk"; ?> </div>
-		  </a>
-		  <input type="button" value="Buy now">
+
+		  <input type="button" value="Buy now"></a>
 		</div>
   <?php } ?>
 

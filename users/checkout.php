@@ -48,8 +48,8 @@ if(isset($_GET["action"]))
   	<li><a href="/BDBooks/users/news.php">News</a></li>
   	<li><a href="/BDBooks/users/contact.php">Contact</a></li>
   	<li><a href="/BDBooks/users/about.php">About</a></li>
-  	<li><a href="/BDBooks/users/allBooks">All books</a></li>
-  	<li><a href="/BDBooks/users/newArrival">New Arrival</a></li>
+		<li><a href="/BDBooks/index.php">New Arrival</a></li>
+	  <li><a href="/BDBooks/index.php">All Books</a></li>
     <li><a href="/BDBooks/users/home.php"><?php echo $_SESSION["email"]; ?></a></li>
     <li><a href="/BDBooks/logout.php">Sign out</a></li>
   </ul>
@@ -111,5 +111,8 @@ if(isset($_GET["action"]))
       </table>
     </div>
   </div>
+	<div class="footer">
+	  <?php include '../assets/layout/footer.php' ; ?>
+	</div>
 </body>
 </html>

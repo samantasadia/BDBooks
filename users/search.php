@@ -160,8 +160,8 @@ span {color: #FF0000;
 <body>
 <div class="heading">
 	<div class="site-logo">
-		<a target="_blank" href="/BDBooks-PHP/index.php">
-		<img src="/BDBooks-PHP/assets/images/bookslogo.PNG" alt="logo" width="300" height="60">
+		<a target="_blank" href="/BDBooks/index.php">
+		<img src="/BDBooks/assets/images/bookslogo.PNG" alt="logo" width="300" height="60">
 		</a>
 	</div>
 </div>
@@ -170,10 +170,10 @@ span {color: #FF0000;
 	<li><a href="/BDBooks/users/news.php">News</a></li>
 	<li><a href="/BDBooks/users/contact.php">Contact</a></li>
 	<li><a href="/BDBooks/users/about.php">About</a></li>
-	<li><a href="/BDBooks/users/allBooks">All books</a></li>
-	<li><a href="/BDBooks/users/newArrival">New Arrival</a></li>
-  <li><a href="/BDBooks-PHP/login.php">Sign in</a></li>
-  <li><a href="/BDBooks-PHP/user/register.php">Sign up</a></li>
+	<li><a href="/BDBooks/index.php">All books</a></li>
+	<li><a href="/BDBooks/index.php">New Arrival</a></li>
+  <li><a href="/BDBooks/login.php">Sign in</a></li>
+  <li><a href="/BDBooks/user/register.php">Sign up</a></li>
 </ul>
 <?php $bk=$books->getBookByName($_GET["search"]);
  ?>

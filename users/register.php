@@ -227,8 +227,8 @@ function test_input($data) {
 	<li><a href="/BDBooks/users/news.php">News</a></li>
 	<li><a href="/BDBooks/users/contact.php">Contact</a></li>
 	<li><a href="/BDBooks/users/about.php">About</a></li>
-	<li><a href="/BDBooks/users/allBooks">All books</a></li>
-	<li><a href="/BDBooks/users/newArrival">New Arrival</a></li>
+	<li><a href="/BDBooks/index.php">All books</a></li>
+	<li><a href="/BDBooks/index.php">New Arrival</a></li>
   <li><a href="/BDBooks/login.php">Sign in</a></li>
   <li><a href="/BDBooks/users/register.php">Sign up</a></li>
 </ul>

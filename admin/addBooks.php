@@ -195,11 +195,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			 else{
 					 echo "Connection successful";
 					 $sql = "INSERT INTO book (bname, author, price, des, pub, image)
-							 VALUES ($bname', '$author', '$price' ,'$des', '$pub', '$target_file')";
+							 VALUES ('$bname', '$author', '$price' ,'$des', '$pub', '$target_file')";
 
 					 if ($connection->query($sql) === TRUE) {
 							 echo "New record created successfully";
-							 header('Location: http://localhost/BDBooks/login.php');
+							 header('Location: http://localhost/BDBooks/index.php');
 							 exit();
 					 }
 

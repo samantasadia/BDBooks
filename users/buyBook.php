@@ -8,7 +8,7 @@ if(empty($_SESSION))
 	header('Location:http://localhost/BDBooks/login.php');
 	exit();
 }
-if($_SESSION["type"] != "user")
+if(($_SESSION["type"] != "user") && ($_SESSION["type"] != "admin"))
 {
   header('Location:http://localhost/BDBooks/login.php');
 	exit();
@@ -77,8 +77,8 @@ if(isset($_POST["add_to_cart"]))
   	<li><a href="/BDBooks/users/news.php">News</a></li>
   	<li><a href="/BDBooks/users/contact.php">Contact</a></li>
   	<li><a href="/BDBooks/users/about.php">About</a></li>
-  	<li><a href="/BDBooks/users/allBooks">All books</a></li>
-  	<li><a href="/BDBooks/users/newArrival">New Arrival</a></li>
+		<li><a href="/BDBooks/index.php">New Arrival</a></li>
+	  <li><a href="/BDBooks/index.php">All Books</a></li>
     <li><a href="/BDBooks/users/home.php"><?php echo $_SESSION["email"]; ?></a></li>
     <li><a href="/BDBooks/logout.php">Sign out</a></li>
   </ul>
@@ -140,20 +140,8 @@ if(isset($_POST["add_to_cart"]))
   <?php } ?>
   </div>
 </div>
+<div class="footer">
+  <?php include '../assets/layout/footer.php' ; ?>
+</div>
 </body>
-  </html>
-<!-- js for toggle menu -->
-<script>
-  var MenuItems = document.getElementById('MenuItems');
-  MenuItems.style.maxHeight = '0px';
-
-  function menutoggle() {
-    if (MenuItems.style.maxHeight == '0px') {
-      MenuItems.style.maxHeight = '200px';
-    } else {
-      MenuItems.style.maxHeight = '0px';
-    }
-  }
-</script>
-
-<!-- js for product gallery -->
+</html>

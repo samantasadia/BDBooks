@@ -1,4 +1,6 @@
-
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -111,8 +113,8 @@ input[type=submit]:hover {
 	<li><a href="/BDBooks/users/news.php">News</a></li>
 	<li><a href="/BDBooks/users/contact.php">Contact</a></li>
 	<li><a href="/BDBooks/users/about.php">About</a></li>
-	<li><a href="/BDBooks/users/allBooks">All books</a></li>
-	<li><a href="/BDBooks/users/newArrival">New Arrival</a></li>
+  <li><a href="/BDBooks/index.php">New Arrival</a></li>
+  <li><a href="/BDBooks/index.php">All Books</a></li>
   <li><a href="/BDBooks/login.php">Sign in</a></li>
   <li><a href="/BDBooks/user/register.php">Sign up</a></li>
 </ul>
