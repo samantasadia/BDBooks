@@ -1,4 +1,5 @@
 <?php
+session_start();
 require 'model/dataaccess.php';
 require_once 'model/Book.php';
 $books = new Book($connection);
@@ -84,10 +85,16 @@ div.bottom {
   <li><a href="#news">News</a></li>
   <li><a href="#contact">Contact</a></li>
   <li><a href="#about">About</a></li>
-  <li><a href="#about">All books</a></li>
-  <li><a href="#about">New Arrival</a></li>
+  <li><a href="/BDBooks/index.php">New Arrival</a></li>
+  <li><a href="/BDBooks/index.php">All Books</a></li>
+  <?php if(isset($_SESSION["email"])){?>
+  <li><a href="/BDBooks/users/home.php"><?php echo $_SESSION["email"]; ?></a></li>
+  <li><a href="/BDBooks/logout.php">Sign out</a></li>
+<?php }
+else{?>
   <li><a href="/BDBooks/login.php">Sign in</a></li>
   <li><a href="/BDBooks/users/register.php">Sign up</a></li>
+<?php } ?>
 </ul>
 <?php $allbook=$books->getAllBooks();
  ?>

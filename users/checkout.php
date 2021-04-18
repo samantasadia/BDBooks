@@ -13,6 +13,21 @@ if($_SESSION["type"] != "user")
   header('Location:http://localhost/BDBooks/login.php');
 	exit();
 }
+if(isset($_GET["action"]))
+{
+     if($_GET["action"] == "delete")
+     {
+          foreach($_SESSION["book_cart"] as $keys => $values)
+          {
+               if($values["id"] == $_GET["id"])
+               {
+                    unset($_SESSION["book_cart"][$keys]);
+                    echo '<script>alert("Item Removed")</script>';  
+                    echo '<script>window.location="/BDBooks/users/checkout.php"</script>';
+               }
+          }
+     }
+}
 ?>
 <html>
 <head>
@@ -69,7 +84,7 @@ if($_SESSION["type"] != "user")
                     <td><?php echo $values["quantity"]; ?></td>
                     <td><?php echo $values["bname"]; ?></td>
                     <td><?php echo $values["price"].".00 Tk"; ?></td>
-                    <td><span class="remove"><img src="https://i.imgur.com/h1ldGRr.png" alt="X"></span></td>
+                    <td><span class="remove"><a href="/BDBooks/users/checkout.php?action=delete&id=<?php echo $values["id"]; ?>"><img src="https://i.imgur.com/h1ldGRr.png" alt="X"></a></span></td>
                   </tr>
                   <?php
                       $total = $total + ($values["quantity"] * $values["price"]);
