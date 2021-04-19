@@ -79,8 +79,18 @@ if(isset($_POST["add_to_cart"]))
   	<li><a href="/BDBooks/users/about.php">About</a></li>
 		<li><a href="/BDBooks/index.php">New Arrival</a></li>
 	  <li><a href="/BDBooks/index.php">All Books</a></li>
-    <li><a href="/BDBooks/users/home.php"><?php echo $_SESSION["email"]; ?></a></li>
-    <li><a href="/BDBooks/logout.php">Sign out</a></li>
+		<?php if(isset($_SESSION["email"])){
+	    if($_SESSION["type"]=="user"){?>
+	      <li><a href="/BDBooks/users/home.php"><?php echo $_SESSION["fname"]; ?></a></li>
+	    <?php } else{ ?>
+	      <li><a href="/BDBooks/admin/home.php"><?php echo $_SESSION["fname"]; ?></a></li>
+	    <?php } ?>
+	  <li><a href="/BDBooks/logout.php">Sign out</a></li>
+	<?php }
+	else{?>
+	  <li><a href="/BDBooks/login.php">Sign in</a></li>
+	  <li><a href="/BDBooks/users/register.php">Sign up</a></li>
+	<?php } ?>
   </ul>
 
 <?php $bk = $books->getBookById($_GET["id"]); ?>
@@ -124,7 +134,7 @@ if(isset($_POST["add_to_cart"]))
   <div class="row">
     <?php for($i=0; $i<3; $i++){?>
     <div class="col-4">
-      <img src="<?=@$allbook[$i]->image ?>" alt="" style="border: 3px solid #555" />
+      <a href="/BDBooks/users/buyBook.php?id=<?php echo $allbook[$i]->id; ?>" ><img src="<?=@$allbook[$i]->image ?>" alt="" style="border: 3px solid #555" /></a>
       <h4><?php echo $allbook[$i]->bname;?></h4>
       <div class="rating">
         <i class="fas fa-star"></i>

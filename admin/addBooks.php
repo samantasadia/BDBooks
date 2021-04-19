@@ -236,7 +236,7 @@ function test_input($data) {
 	<li><a href="/BDBooks/users/about.php">About</a></li>
 	<li><a href="/BDBooks/users/allBooks">All books</a></li>
 	<li><a href="/BDBooks/users/newArrival">New Arrival</a></li>
-  <li><a href="/BDBooks/admin/home.php">Samanta</a></li>
+  <li><a href="/BDBooks/admin/home.php"><?php echo $_SESSION["fname"];?></a></li>
   <li><a href="/BDBooks/logout.php">Sign out</a></li>
 </ul>
 <div class="hero-bg">

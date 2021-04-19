@@ -87,8 +87,12 @@ div.bottom {
   <li><a href="/BDBooks/users/about.php">About</a></li>
   <li><a href="/BDBooks/index.php">New Arrival</a></li>
   <li><a href="/BDBooks/index.php">All Books</a></li>
-  <?php if(isset($_SESSION["email"])){?>
-  <li><a href="/BDBooks/users/home.php"><?php echo $_SESSION["email"]; ?></a></li>
+  <?php if(isset($_SESSION["email"])){
+    if($_SESSION["type"]=="user"){?>
+      <li><a href="/BDBooks/users/home.php"><?php echo $_SESSION["fname"]; ?></a></li>
+    <?php } else{ ?>
+      <li><a href="/BDBooks/admin/home.php"><?php echo $_SESSION["fname"]; ?></a></li>
+    <?php } ?>
   <li><a href="/BDBooks/logout.php">Sign out</a></li>
 <?php }
 else{?>

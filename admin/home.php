@@ -1,8 +1,8 @@
 <?php
+session_start();
 require '../model/dataaccess.php';
 require_once '../model/User.php';
 $admin = new User($connection);
-session_start();
 if(empty($_SESSION))
 {
 	header('Location:http://localhost/BDBooks/login.php');
@@ -13,6 +13,8 @@ if($_SESSION["type"] != "admin")
   header('Location:http://localhost/BDBooks/login.php');
 	exit();
 }
+$user = $admin->getUserByEmailPass($_SESSION["email"], $_SESSION["password"]);
+$_SESSION["fname"]= $user->firstName;
 ?>
 <!DOCTYPE html>
 <html>
@@ -61,7 +63,7 @@ span {color: #FF0000;}
 	<li><a href="/BDBooks/users/about.php">About</a></li>
 	<li><a href="/BDBooks/index.php">All books</a></li>
 	<li><a href="/BDBooks/index.php">New Arrival</a></li>
-  <li><a href="/BDBooks/admin/home.php"><?php echo $_SESSION["email"];?></a></li>
+  <li><a href="/BDBooks/admin/home.php"><?php echo $_SESSION["fname"];?></a></li>
   <li><a href="/BDBooks/logout.php">Sign out</a></li>
 </ul>
 <div class="hero-bg">
@@ -69,7 +71,6 @@ span {color: #FF0000;}
 		<div class="form-design">
 		<h1>Welcome to home page!!</h1><br>
 		<?php
-		$user = $admin->getUserByEmailPass($_SESSION["email"], $_SESSION["password"]);
 		if(!empty($user)){
 				echo "Name :" . $user->firstName." ". $user->lastName . "<br>";
 				echo "Email :" . $user->email . "<br>";

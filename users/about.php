@@ -91,8 +91,14 @@ html {
   <li><a href="/BDBooks/users/about.php">About</a></li>
   <li><a href="/BDBooks/index.php">New Arrival</a></li>
   <li><a href="/BDBooks/index.php">All Books</a></li>
+  <?php if(isset($_SESSION["email"])){?>
+  <li><a href="/BDBooks/users/home.php"><?php echo $_SESSION["fname"]; ?></a></li>
+  <li><a href="/BDBooks/logout.php">Sign out</a></li>
+  <?php }
+  else{?>
   <li><a href="/BDBooks/login.php">Sign in</a></li>
-  <li><a href="/BDBooks/user/register.php">Sign up</a></li>
+  <li><a href="/BDBooks/users/register.php">Sign up</a></li>
+  <?php } ?>
 </ul>
 <body>
 

@@ -50,8 +50,18 @@ if(isset($_GET["action"]))
   	<li><a href="/BDBooks/users/about.php">About</a></li>
 		<li><a href="/BDBooks/index.php">New Arrival</a></li>
 	  <li><a href="/BDBooks/index.php">All Books</a></li>
-    <li><a href="/BDBooks/users/home.php"><?php echo $_SESSION["email"]; ?></a></li>
-    <li><a href="/BDBooks/logout.php">Sign out</a></li>
+		<?php if(isset($_SESSION["email"])){
+	    if($_SESSION["type"]=="user"){?>
+	      <li><a href="/BDBooks/users/home.php"><?php echo $_SESSION["fname"]; ?></a></li>
+	    <?php } else{ ?>
+	      <li><a href="/BDBooks/admin/home.php"><?php echo $_SESSION["fname"]; ?></a></li>
+	    <?php } ?>
+	  <li><a href="/BDBooks/logout.php">Sign out</a></li>
+	<?php }
+	else{?>
+	  <li><a href="/BDBooks/login.php">Sign in</a></li>
+	  <li><a href="/BDBooks/users/register.php">Sign up</a></li>
+	<?php } ?>
   </ul>
   <div id="w">
     <header id="title">
@@ -105,7 +115,7 @@ if(isset($_GET["action"]))
 
           <!-- checkout btn -->
           <tr class="checkoutrow">
-            <td colspan="5" class="checkout"><button id="submitbtn">Checkout Now!</button></td>
+            <td colspan="5" class="checkout"><a href="/BDBooks/users/placeOrder.php"><button id="submitbtn">Checkout Now!</button></a></td>
           </tr>
         </tbody>
       </table>

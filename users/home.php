@@ -75,6 +75,7 @@ th {
 			if ($result->num_rows > 0) {
 			  // output data of each row
 			  while($row = $result->fetch_assoc()) {
+					$_SESSION["fname"]= $row["firstName"];
 					echo "Name :" . $row["firstName"] ." ". $row["lastName"] . "<br>";
 					echo "Email :" . $row["email"] . "<br>";
 					echo "Gender :" . $row["gender"] . "<br>";
