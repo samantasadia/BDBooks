@@ -1,5 +1,8 @@
 <?php
 session_start();
+require '../model/dataaccess.php';
+require_once '../model/Book.php';
+$books = new Book($connection);
 if(empty($_SESSION))
 {
 	header('Location:http://localhost/BDBooks/login.php');
@@ -13,8 +16,14 @@ if($_SESSION["type"] != "user")
 ?>
 <html>
 <head>
-  <link rel="stylesheet" href="../assets/css/header.css">
+	<link rel="stylesheet" href="../assets/css/footer.css">
+  <link rel="stylesheet" href="../assets/css/header2.css">
   <link rel="stylesheet" href="../assets/css/orderPlace.css">
+	<style>
+	tr.f1 th {
+		text-align:center;
+	}
+</style>
 </head>
 <body>
   <div class="heading">
@@ -49,8 +58,9 @@ if($_SESSION["type"] != "user")
   <div class="title">
       <h2>Checkout Information</h2>
   </div>
+<form action="/BDBooks/users/home.php" method="post">
 <div class="d-flex">
-  <form action="" method="">
+	<div class="fl">
     <label>
       <span class="fname">Full Name <span class="required">*</span></span>
       <input type="text" name="fname">
@@ -61,22 +71,21 @@ if($_SESSION["type"] != "user")
     </label>
     <label>
       <span>Division <span class="required">*</span></span>
-      <input type="text" name="div" placeholder="Dhaka..." required>
+      <input type="text" name="div" placeholder="Dhaka...">
     </label>
     <label>
       <span>Town / City <span class="required">*</span></span>
       <input type="text" name="city">
     </label>
     <label>
-    <label>
       <span>Address <span class="required">*</span></span>
       <input type="text" name="address">
     </label>
     <label>
-      <span>Email Address <span class="required">*</span></span>
-      <input type="email" name="city">
+      <span>Email Address <span class="required"></span></span>
+      <input type="email" name="email" value="example@gmail.com" readonly>
     </label>
-  </form>
+  </div>
   <div class="Yorder">
     <?php
     if(!empty($_SESSION["book_cart"]))
@@ -84,12 +93,12 @@ if($_SESSION["type"] != "user")
           $shipping_cost=50.00;
          $total = 0; ?>
     <table>
-      <tr>
+      <tr class="f1">
         <th colspan="2">Your order</th>
       </tr>
       <tr>
-        <th>Product Name</th>
-        <th>Product price x (Qty)</th>
+        <th>Product</th>
+        <th>Price x (Qty)</th>
       </tr>
 
             <?php  foreach($_SESSION["book_cart"] as $keys => $values)
@@ -97,7 +106,7 @@ if($_SESSION["type"] != "user")
                $bk = $books->getBookById($values["id"]);
                ?><tr>
                 <td><?php echo $values["bname"]; ?></td>
-                <td><?php echo $values["price"]*$values["quantity"]; ?></td>
+                <td><?php echo $values["price"]*$values["quantity"]." Tk"; ?></td>
                 </tr>
 
               <?php
@@ -106,11 +115,11 @@ if($_SESSION["type"] != "user")
 
       <tr>
         <td>Shipping</td>
-        <td>50.00 Tk</td>
+        <td><?php echo $shipping_cost." Tk"; ?></td>
       </tr>
       <tr>
         <td>Total </td>
-        <td>Free shipping</td>
+        <td><?php echo $total+$shipping_cost." Tk"; ?></td>
       </tr>
     </table>
   <?php } ?>
@@ -121,7 +130,8 @@ if($_SESSION["type"] != "user")
     </div>
     <p>
         Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our account.
-    </p>
+
+		</p>
     <div>
       <input type="radio" name="dbt" value="cd"> Cash on Delivery
     </div>
@@ -130,9 +140,10 @@ if($_SESSION["type"] != "user")
       <img src="https://www.logolynx.com/images/logolynx/c3/c36093ca9fb6c250f74d319550acac4d.jpeg" alt="" width="50">
       </span>
     </div>
-    <button type="button">Place Order</button>
+    <input type="submit" name="submit" value="Place Order">
   </div><!-- Yorder -->
  </div>
+</form>
 </div>
 <div class="footer">
   <?php include '../assets/layout/footer.php' ; ?>
